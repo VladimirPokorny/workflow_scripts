@@ -41,4 +41,4 @@ os.system('git commit -m "Initial commit"')
 
 os.system('code .')
 
-print(f'Project **{project_name}** created successfully!')
+print(f'Project >>{project_name}<< created successfully!')
