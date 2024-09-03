@@ -6,7 +6,7 @@ import re
 class GifMaker:
     def __init__(self, img_sufix='.png') -> None:
         self.working_directory = os.getcwd()
-        self.image_folder_path = os.path.join(self.working_directory, 'images')
+        self.image_folder_path = os.path.join(self.working_directory, 'resized_images')
         self.gif_output_path = os.path.join(self.image_folder_path, 'gifs')
         self.list_all_images = []
         self.background_image = None
@@ -17,17 +17,17 @@ class GifMaker:
             for file in files:
                 if file.endswith(self.img_sufix) and not re.match(r'^_.*', file):
                     self.list_all_images.append(os.path.join(root, file))
-    
+
     def find_background_image(self):
         for root, dirs, files in os.walk(self.image_folder_path):
             for file in files:
                 if file.endswith(self.img_sufix) and re.match(r'^_.*', file):
                     self.background_image = os.path.join(root, file)
                     break
-        
+
         if not self.background_image:
             raise FileNotFoundError('Background image not found')
-    
+
     def create_gif_folder(self):
         try:
             os.mkdir(self.gif_output_path)
@@ -42,7 +42,7 @@ class GifMaker:
             img = Image.open(path)
             gif_name = os.path.basename(path)
             gif_path = os.path.join(self.gif_output_path, f'{gif_name}.gif')
-            
+
             img.save(
                 gif_path,
                 save_all=True,
@@ -50,7 +50,7 @@ class GifMaker:
                 duration=duration,
                 loop=0
             )
-            
+
             images.clear()
 
 if __name__ == "__main__":
