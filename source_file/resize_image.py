@@ -6,7 +6,6 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 
-
 class ImageResizer:
     def __init__(self, img_sufix='.png') -> None:
         self.working_directory = os.getcwd()
